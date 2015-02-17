@@ -1,13 +1,3 @@
-/*
-
-  PComp Final - Stitching Stories
-  Dec. 2014
-
-  Processing code to run video that will be 
-  controlled by the physical controller
-
-*/
-
 import processing.serial.*;
 import processing.video.*;
 import ddf.minim.*;
@@ -56,9 +46,7 @@ void setup()
   passiveMovie = new Movie(this, "TWISTIT.MOV");
   playingMovie = passiveMovie;
   
-  //setup music
-  minim = new Minim(this);
-  videoSound = minim.loadFile("Night Lights.mp3");
+ 
   
   //set canvas size
   size(displayWidth,displayHeight);
@@ -75,16 +63,19 @@ void setup()
      arrSwitchVals[i] = 0; 
      arrKeyboardVals[i] = 0;
   }
-  
-  //loop the audio independently of the video
-  videoSound.loop();
-  
+   
+   //setup music and loop the audio independently of the video
+   minim = new Minim(this);
+   videoSound = minim.loadFile("Night Lights.mp3");
+   videoSound.loop();
+   
   //play the first video 
   println("intro movie");
   frameRate(24);
   playingMovie.loop();
   timeElapsed = 0.0;
   lastKeyPressed = 'c';
+  
 }
 
 /*
@@ -99,6 +90,7 @@ void draw()
  //draw image to pass in movie frames to
  // if changeEvent, call transition function which lasts over 500 milliseconds
  // all transition function does is apply some sort of mask
+ background(0,0,0);
  imageMode(CENTER);
  image(playingMovie,displayWidth/2,displayHeight/2);
  
@@ -247,19 +239,6 @@ void serialEvent (Serial thisPort)
       thisPort.write('x'); 
     }//end arrReadSwitchVals[arrReadSwitchVals.length-1] == 1 check 
   }//end input != null check
-  else //Plan B
-  {
-    //check if key has been hit. If it has, switch the movie and reset the array
-    if(arrKeyboardVals[arrKeyboardVals.length-1] == 1 & lastKeyPressed != key)
-    {
-      movieSwitch(arrKeyboardVals);
-      lastKeyPressed = key;
-      for(int i = 0; i < arrKeyboardVals.length; i++)
-      {
-         arrKeyboardVals[i] = 0; 
-      }
-    }
-  }
 }
 
 /*
