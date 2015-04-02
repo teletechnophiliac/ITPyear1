@@ -1,0 +1,302 @@
+<html>
+
+	<head>
+		
+		<title>Memory Game</title>
+		
+		<!-- Pull in P5 library -->
+		<script type="text/javascript" src="p5.js"></script> 
+		
+		<script type="text/javascript">
+			
+			//card setup
+			var arrCards = []; //cards for game
+			var arrSymbols = ["red circle", "green triangle", "blue square", "yellow star"]; //symbols to memorize
+			var blankImage;
+			
+			//temp variables to draw grid of cards
+			var gridPosX = 70; 
+			var gridPosY = 100; 
+			
+			//gameplay
+			var isACardFlipped = false; //check if a card has been flipped for a match check
+			var firstCardFlippedCol = -1;
+			var firstCardFlippedRow = -1; //store value of first card flipped in a match check
+			var pairsFound = 0; //end game when there are 8 pairs
+			
+			function preload()
+			{
+				//setup cards
+				
+				for(var i = 0; i < 2; i++)
+				{
+					arrCards[i] = [];
+				}
+				//console.log("array set"); <-- debug
+				
+				var arrSymbolsUsed = [0,0,0,0]; 
+				var symbol; 
+				var symbolNum;
+				blankImage = loadImage("whitesquare.jpg");
+				
+				//iterate through grid of cards
+				for(var a = 0; a < 2; a++)
+				{
+					for(var b = 0; b < 4; b++)
+					{
+						//pick a random symbol to assign to the card you're on
+						symbolNum = Math.floor(random(0, arrSymbols.length));
+						//console.log(symbolNum); <-- debug
+						
+						//check to see that that symbol hasn't been used more than 4x
+						//if it has, pick a different symbol
+						
+						while(arrSymbolsUsed[symbolNum] >= 2)
+						{
+							symbolNum = Math.floor(random(0, arrSymbols.length));
+						}
+						
+						//console.log(symbolNum); <-- debug
+						
+						//assign symbol to the grid
+						arrCards[a][b] = new Card();
+						arrCards[a][b].setSymbol(arrSymbols[symbolNum]);
+						arrCards[a][b].setSymbolImage();
+						
+						
+						//increase the count on the times that symbol has been used.
+						arrSymbolsUsed[symbolNum]++;
+						
+						//console.log(arrCards[a][b].getSymbol()); <-- debug
+					}
+				}
+				//console.log("cards set"); <-- debug
+			}
+			
+			function setup()
+			{
+				//background
+				createCanvas(500, 300);
+				background(70,70,70);
+				//console.log("created canvas"); <-- debug
+				
+				//title
+				textSize(24);
+				textAlign(CENTER);
+				textStyle(BOLD);
+				textFont("Avenir");
+				text("Memory Game", 250, 30); 
+				
+				//draw cards
+				
+				for(var i = 0; i < 2; i++)
+				{
+					for(var j = 0; j < 4; j++)
+					{
+						//attach square to the associated grid piece
+						ellipse(gridPosX, gridPosY, 80, 80);
+						arrCards[i][j].x = gridPosX;
+						arrCards[i][j].y = gridPosY;
+						image(blankImage, gridPosX-25, gridPosY-25);
+	
+						gridPosX += 120; //move over to draw next square
+					}	
+					
+					gridPosY += 100; //move down to set up next row
+					gridPosX = 70; //reset x to align with leftmost column
+				}
+				
+			}
+			
+			function draw() //loops so keep var declaration outside of this
+			{	
+				//if all pairs found, game over
+				textSize(16);
+				textAlign(LEFT);
+				textStyle(BOLD);
+				textFont("Avenir");
+				text("Pairs found: " + pairsFound, 20, 280);
+				
+				if(pairsFound === 4)
+				{
+					alert("YOU WON!");
+				}
+			}
+			
+			//check to see which card was clicked. See if it's already matched - if it's 
+			//matched, do nothing. If not, see if it's already flipped. If it's already flipped,
+			//do nothing. If it's neither matched nor flipped, flip the card. Check to see see if
+			//another card has already been flipped. If yes, then compare the two cards. If no,
+			//store this card to check against a second card
+			function mouseClicked() 
+			{
+				//check to see which card was clicked
+				
+				var distance;
+				var cardRow;
+				var cardCol;
+				
+				for (var row = 0; row < 2; row++)
+				{
+					for(var col = 0; col < 4; col++)
+					{
+						distance = dist(mouseX, mouseY, arrCards[row][col].x, arrCards[row][col].y);
+						if (distance < 80) //the radial distance
+						{
+							cardRow = row;
+							cardCol = col;
+						}
+					}
+				}
+				
+				//check if the card is not matched - since we do nothing if matched, no else
+				//We also do nothing if the card is already flipped, so we can check both
+				
+				//console.log(arrCards[cardRow][cardCol].isMatched()); <-- debug
+				//console.log(arrCards[cardRow][cardCol].isEnabled()); <-- debug
+				
+				if (!(arrCards[cardRow][cardCol].isMatched()) && arrCards[cardRow][cardCol].isEnabled())
+				{
+					//flip the card
+					arrCards[cardRow][cardCol].flip();
+					
+					//check if there is another card flipped
+					if(isACardFlipped)
+					{
+						//check for match
+						if(arrCards[firstCardFlippedRow][firstCardFlippedCol].getSymbol() ===
+							arrCards[cardRow][cardCol].getSymbol())
+						{
+							pairsFound++;
+							arrCards[firstCardFlippedRow][firstCardFlippedCol].match();
+							arrCards[cardRow][cardCol].match();
+						}
+						else //flip cards back over and reset values for flipped card
+						{
+							arrCards[firstCardFlippedRow][firstCardFlippedCol].flip();
+							arrCards[cardRow][cardCol].flip();
+						}
+						
+						firstCardFlippedCol = -1;
+						firstCardFlippedRow = -1;
+						isACardFlipped = false;
+					}
+					else
+					{
+						//store this card's info
+						firstCardFlippedCol = cardCol;
+			 			firstCardFlippedRow = cardRow;
+						isACardFlipped = true;
+					}
+				}
+			
+		}//function		
+
+		//begin Card class definition
+		
+		function Card()
+		{
+			this.x = 0;
+			this.y = 0; 
+			this.symbol = null;
+			this.enabled = true;
+			this.flipped = false;
+			this.symbolImage = null;
+			this.matched = false;
+		}
+		
+		Card.prototype.setSymbol = function(symbol)
+		{
+			this.symbol = symbol;
+		};
+		
+		Card.prototype.getSymbol = function()
+		{
+			return this.symbol;
+		};
+		
+		Card.prototype.disableCard = function()
+		{
+			this.enabled = false;
+		};
+		
+		Card.prototype.isEnabled = function()
+		{
+			return this.enabled;
+		};
+		
+		Card.prototype.flip = function()
+		{
+			//console.log(this.flipped);
+			if (this.flipped)
+			{
+				//hide symbol
+				this.hideSymbolImage();
+				this.enabled = true;
+			}
+			else
+			{
+				//draw symbol
+				image(this.symbolImage, this.x-25, this.y-25);
+				this.disableCard();		
+			}
+			
+			this.flipped = !(this.flipped);
+			//console.log(this.flipped); 
+		};
+		
+		Card.prototype.isFlipped = function()
+		{
+			return this.flipped;
+		};
+		
+		
+		Card.prototype.setSymbolImage = function()
+		{
+			switch(this.symbol)
+			{
+				case "red circle":
+					this.symbolImage = loadImage("redcircle.jpg");
+					break;	
+				case "green triangle": 
+					this.symbolImage = loadImage("greentriangle.jpg");
+					break;
+				case "blue square":
+					this.symbolImage = loadImage("bluesquare.jpg");
+					break;
+				case "yellow star":
+					this.symbolImage = loadImage("yellowstar.jpg");
+					break;
+				default:
+					this.symbolImage = loadImage("whitesquare.jpg");
+					break;
+			}
+		};
+		
+		Card.prototype.hideSymbolImage = function()
+		{
+			image(blankImage, this.x-25, this.y-25);
+		};
+		
+		Card.prototype.match = function()
+		{
+			this.matched = true;
+			this.disableCard();
+		};
+		
+		Card.prototype.isMatched = function()
+		{
+			return this.matched;
+		}	
+		
+		</script>
+	
+	</head>
+	
+	
+	<body>
+	
+
+	</body>
+
+</html>
