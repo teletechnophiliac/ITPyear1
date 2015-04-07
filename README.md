@@ -14,12 +14,13 @@ Work done during my time at NYU's Interactive Telecommunications Program
 <p>
 <h5>Networked Media<h5>
 <p>
-<i>Memory Game</i>(HTML/CSS, JavaScript): The classic card matching memory game built in p5.js
+<i>Memory Game</i> (HTML/CSS, JavaScript): The classic card matching memory game built in p5.js
 <p>
 <h5>Intro to Physical Computing<h5>
 <p>
 <i>Stitching Stories</i> (Processing, Arduino): Final project - a non linear story controlled by a physical controller made from a hacked Bop It. <a href="www.teletechnophiliac.com/blog/2014/12/final-project-documentation-stitching-storieshtml">[Documentation]</a>
 <p>
+<hr>
 <i>Spring 2015</i>
 <p>
 <ul>
