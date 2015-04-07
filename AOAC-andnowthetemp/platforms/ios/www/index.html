@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+
+        <!-- CSS -->
+        <link rel="stylesheet" type="text/css" href="css/index.css" />
+        <link rel="stylesheet" type="text/css" 
+            href="http://www.justinaguilar.com/animations/css/animations.css" />
+
+        <!-- JavaScript -->
+    	<script type="text/javascript" src="cordova.js"></script>
+    	<script type="text/javascript">
+
+	           //data for reading IR sensor on specific SensorTag to avoid connecting to misc BLE sensors
+                var irSensor = 
+                {
+                    service:  "F000AA00-0451-4000-B000-000000000000",
+                    data: "F000AA01-0451-4000-B000-000000000000",
+                    configuration: "F000AA02-0451-4000-B000-000000000000",
+                    period: "F000AA03-0451-4000-B000-000000000000"
+                };
+
+                var ambient, arrData; //ambient temperature, array for storing data read in
+                var lowerByte, upperByte; //byte shifting
+                var celsius, fahrenheit;
+
+                function onPageLoad() 
+                {
+                    document.addEventListener("deviceready", onDeviceReady, false);
+                }
+
+                //scan for BLE devices
+                function onDeviceReady() 
+                {
+                    ble.scan([], 10, scanSuccess, scanFailure);
+                }
+
+                //on success, stop scan and connect to the SensorTag
+                function scanSuccess(peripheral) 
+                {
+                    if(peripheral.id == "FEAE7295-2902-2BE4-3B13-D572ADD8B0D3")
+                    {
+                        ble.stopScan(stopScanSuccess, stopScanFailure); 
+                        ble.connect(peripheral.id, connectSuccess, connectFailure);  
+                    }
+                }
+
+                function scanFailure(err) 
+                {
+                    console.log("Scan failure: " + err);
+                }
+
+                function stopScanSuccess()
+                {
+                    console.log("Successfully stopped scan");
+                }
+
+                function stopScanFailure(err)
+                {
+                    console.log("Stop scan error: " + error);
+                }
+
+                //write to sensor to turn notifications on
+                function connectSuccess(peripheral)
+                {
+                    var configData = new Uint8Array(1);
+                    configData[0] = 0x01;
+                    ble.write(peripheral.id, irSensor.service, irSensor.configuration, configData.buffer, function() { console.log("Started IR sensor."); },function() { console.log("Starting sensor error");});
+
+                    ble.startNotification(peripheral.id, irSensor.service, irSensor.data, notifySuccess, notifyFailure);
+
+                }
+
+                function connectFailure(err)
+                {
+                    alert("Connection error: " + err);
+                }
+
+                //calculations for getting IR data and converting to C/F (see SensorTag guide from TI)
+                function notifySuccess(data)
+                {
+                    arrData = new Uint8Array(data);
+
+                    lowerByte = arrData[arrData.length-2];
+                    upperByte = arrData[arrData.length-1];
+
+                    celsius = Math.round(((upperByte << 8) + lowerByte)/128.0);
+                    fahrenheit = Math.round(((9/5)*celsius) + 32);
+
+                    document.getElementById("temp").innerHTML = ("F: " + fahrenheit + " | C: " + celsius);
+
+                    if(fahrenheit > 75)
+                    {
+                        document.getElementById("sensortag-cartoon").src = "img/hot.png";
+                    }
+                    else if (fahrenheit < 50)
+                    {
+                        document.getElementById("sensortag-cartoon").src = "img/cold.png";
+                    }
+                    else
+                    {
+                        document.getElementById("sensortag-cartoon").src = "img/normal.png";
+                    }
+                }
+
+                function notifyFailure(err)
+                {
+                    alert("Notify failure: " + err);
+                }
+
+                window.addEventListener('load', onPageLoad);
+                
+	   </script>
+
+    </head>
+
+    <body>
+
+        <div id="content">
+
+            <h3>And now... the temperature!</h3>
+
+            <p id="temp">
+
+            </p>
+
+            <img id="sensortag-cartoon" class="floating" />
+
+        </div>
+
+    </body>
+
+</html>

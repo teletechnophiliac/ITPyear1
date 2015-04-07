@@ -1,0 +1,29 @@
+body 
+{
+    background-color:white;
+    font-family:'HelveticaNeue-Light', 'HelveticaNeue', Helvetica, Arial, sans-serif;
+    height:100%;
+    margin:0px;
+    padding:0px;
+    text-transform:uppercase;
+    width:100%;
+    text-align: center;
+}
+
+h3
+{
+    margin: 10% auto;
+    font-size:36px;
+}
+
+p
+{
+    margin: 2% auto;
+}
+
+#sensortag-cartoon
+{
+    margin: 5% auto;
+    height: 45vh;
+    width: auto;
+}
