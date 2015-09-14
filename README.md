@@ -12,11 +12,11 @@ Work done during my time at NYU's Interactive Telecommunications Program
   <li>Intro to Physical Computing</li>
 </ul>
 <p>
-<h5>Networked Media<h5>
+<h5>Networked Media</h5>
 <p>
 <i>Memory Game</i> (HTML/CSS, JavaScript): The classic card matching memory game built in p5.js
 <p>
-<h5>Intro to Physical Computing<h5>
+<h5>Intro to Physical Computing</h5>
 <p>
 <i>Stitching Stories</i> (Processing, Arduino): Final project - a non linear story controlled by a physical controller made from a hacked Bop It. <a href="www.teletechnophiliac.com/blog/2014/12/final-project-documentation-stitching-storieshtml">[Documentation]</a>
 <p>
@@ -35,4 +35,10 @@ _And Now The Temp_ (HTML/CSS, JavaScript): PhoneGap application that works with 
 <p>
 <h5>Project Development Studio</h5>
 <p>
-<h5>This is the Remix</h5>
+<hr>
+<i>Fall 2015</i>
+<p>
+<ul>
+  <li>Programming A to Z</li>
+  <li>Data Visualization from 2D to 4D</li>
+</ul>
