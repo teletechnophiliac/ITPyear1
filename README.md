@@ -1,7 +1,7 @@
-ITP
+ITP Year 1
 ===
 
-Work done during my time at NYU's Interactive Telecommunications Program
+Work done during my first year at NYU's Interactive Telecommunications Program
 
 <h3>Courses</h3>
 
@@ -36,9 +36,4 @@ _And Now The Temp_ (HTML/CSS, JavaScript): PhoneGap application that works with 
 <h5>Project Development Studio</h5>
 <p>
 <hr>
-<i>Fall 2015</i>
-<p>
-<ul>
-  <li>Programming A to Z</li>
-  <li>Data Visualization from 2D to 4D</li>
-</ul>
+
