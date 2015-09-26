@@ -16,6 +16,12 @@ Work done during my first year at NYU's Interactive Telecommunications Program
 <p>
 <i>Memory Game</i> (HTML/CSS, JavaScript): The classic card matching memory game built in p5.js
 <p>
+<i>Halloween at ITP</i> (HTML/CSS, JavaScript): A responsive web ad for Halloween at ITP 
+<p>
+<i>IMDB JSON</i> (HTML/CSS, JavaScript): An application that takes a movie title from the user and returns the poster art and a random fact about it. 
+<p>
+<i>ITP Fiction</i> (HTML/CSS, JavaScript): Final for Networked Media - a database of user submitted stories. 
+<p>
 <h5>Intro to Physical Computing</h5>
 <p>
 <i>Stitching Stories</i> (Processing, Arduino): Final project - a non linear story controlled by a physical controller made from a hacked Bop It. <a href="www.teletechnophiliac.com/blog/2014/12/final-project-documentation-stitching-storieshtml">[Documentation]</a>
@@ -26,6 +32,7 @@ Work done during my first year at NYU's Interactive Telecommunications Program
 <ul>
   <li>Always On, Always Connected</li>
   <li>Project Development Studio</li>
+  <li>Playful Communication of Serious Research</li>
   <li>This is the Remix</li>
 </ul>
 <p>
@@ -35,5 +42,7 @@ _And Now The Temp_ (HTML/CSS, JavaScript): PhoneGap application that works with 
 <p>
 <h5>Project Development Studio</h5>
 <p>
+<h5>Playful Communication of Serious Research</h5>
+_RED_ (HTML/CSS, JavaScript): PhoneGap application for the RED room exhibit to teach visitors about the color red and its effects on us. 
 <hr>
 
