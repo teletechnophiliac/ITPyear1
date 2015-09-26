@@ -1,0 +1,94 @@
+<html>
+
+	<head>
+		<!-- begin imports -->
+		<link rel="stylesheet" type="text/css" href="imdbtrivia.css">
+		
+		<!-- begin scripts -->
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+		<!-- code help from the IMDbAPI site (myapifilms.com) -->
+		<!-- load movie information from IMDb -->
+		<script type="text/javascript">
+		var movie,
+			moviePosterURL,
+			movieTrivia;
+	
+		function sendRequest()
+		{
+			$.ajax({
+				
+		 		  data:      'title='+ $("#textBox").val() +'&format=JSONP',
+  				  url:       'http://www.myapifilms.com/imdb',
+  				  dataType:  'jsonp',
+   				  success:   function (response, textStatus, jqXHR) 
+   				  {
+   				 	console.log("found movie");
+   				 	
+   				 	movie = response[0];
+   				 	
+     				
+            		if (movie.countries != undefined) 
+            		{
+            			console.log("found the countries");
+            			$.each(movie.countries, function(index, country)
+            			{
+            				$("#countries").append(country + ", ");
+            			});
+            		}
+            		
+            		console.log("countries added");
+            		
+            		if (movie.urlPoster != undefined) 
+            		{
+            			console.log("adding poster");
+            			moviePosterURL = "\&quot;" + movie.urlPoster + "\&quot;";
+            			$("#poster").attr("src", moviePosterURL);
+            			
+            		}
+            		
+            		console.log("poster added.");
+            		
+            		
+   				  },
+   				  error: function()
+   				  { 
+   				  	alert("error");
+   				  }
+			});        
+		}
+
+		</script>
+
+		<!-- end scripts -->
+		
+		<title> IMDB Trivia </title>	
+
+	</head>
+	
+	<body>
+
+		Title: <input type="text" id="textBox"/> <button onclick="sendRequest();">Send</button>
+
+
+
+		<br />
+	<div id="error"></div>
+	<br />
+	<b>Countries</b>: 
+	<div id="countries" style="margin-left: 20px;"></div>
+	<br />
+	
+	<img id="poster"></img>
+
+
+
+
+
+
+
+
+
+	</body>
+
+</html>

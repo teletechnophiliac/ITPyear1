@@ -1,0 +1,61 @@
+<html>
+  <head>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <style>
+    
+      body
+      {
+	      background-color: #ffffff;
+	      font-family: Avenir, sans-serif;
+	      position: relative;
+	      margin: auto;
+	      padding: 2%;
+      }
+      
+      #storyTitle
+      {
+        text-decoration: underline;
+      }
+      
+      #storyAuthor
+      {
+         font-style: italic;
+      }
+      
+        #logo
+      {
+        width: 80%;
+        margin: 0 auto;
+      }
+      
+      a
+      {
+        color: #ffffff;
+        background-color: #000000;
+        padding: 2px;
+      }
+      
+    </style>
+    
+     
+     
+    <title>ITP Fiction - Read a Story</title>
+    
+  </head>
+  
+  <body>
+  
+   <div><img src="ITPFictionlogo.png"></div>
+   <br />
+   <br />
+   <h3 id="storyTitle"><%= theStory.title %></h3>
+   <h5 id="storyAuthor"><%= theStory.author %></h5>
+   <p>
+    <%= theStory.story %>
+   </p> 
+   <br />
+   <a href="/viewstories">Back to Stories</a>
+  </body>
+</html>

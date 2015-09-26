@@ -1,0 +1,63 @@
+body
+{
+	background-color: #464646;
+}
+
+/* Fonts and Text Formatting */
+
+*
+{
+	font-family: "Futura", sans serif;
+	color: #ffffff;
+}
+
+button, #textbox
+{
+	color: #000000;
+}
+
+h1 
+{
+	position: relative;
+	text-align: center;
+	margin: 5% auto;
+}
+
+h3
+{
+	text-align:center;
+}
+
+#movieInfo
+{
+	position: relative;
+	float: center;
+	height: 50%;
+	width: 65%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#movieInfo p
+{
+	 float: center;
+	 position: relative;
+	 vertical-align: middle; 
+	 width: 40%;
+	 margin: auto;
+}
+
+#movieInfo p > img 
+{ 
+	position: relative; 
+	float: center; 	
+	margin: 5% auto;
+	max-height: 300px;
+	height: auto;
+	width: auto;
+}
+
+#triviaPart
+{
+	display:none;
+}

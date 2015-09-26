@@ -1,0 +1,78 @@
+<html>
+  <head>
+    
+    <title>ITP Fiction - Add a Story</title>
+    
+    <!--device zoom-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <style>
+      body
+      {
+        background-color: #ffffff;
+        font-family: Avenir, sans-serif;
+      	position: relative;
+      	margin: auto;
+	      padding: 2%;
+      }
+ 
+      input, input#submit
+      {
+        font-family:inherit;
+        margin: 10px;
+      }
+ 
+      textarea
+      {
+        font-family:inherit;
+        width: 40%;
+        max-width: 45%;
+        min-width: 200px;
+        height: 100px;
+        margin: 10px 0px;
+      }
+
+      #logo
+      {
+        width: 80%;
+        margin: 0 auto;
+      }
+        
+      a
+      {
+        color: #ffffff;
+        background-color: #000000;
+        padding: 2px;
+      }
+    </style>
+   
+  </head>
+  
+  <body>
+    
+    
+    <div id="logo"><img src="ITPFictionlogo.png"></div>
+    <br />
+    <br />
+    <a href="/viewstories">See All Stories!</a>
+    <br />
+    <h3>Add Your Story</h3>
+    <br />
+    <form action="/addstory" method="POST">
+      Title: <input type="text" name="titletext">
+      <br />
+      Author: <input type="text" name="author">
+      <br />
+      Tags (separate by comma): <input type="text" name="tagsraw">
+      <br />
+      Story
+      <br />
+      <textarea name="story"></textarea>
+      <br />
+      <input type="submit" id ="submit" value="Add Story" name="submit">      
+    </form>
+    
+     
+    
+  </body>
+</html>

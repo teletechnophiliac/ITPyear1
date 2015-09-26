@@ -1,0 +1,110 @@
+<html>
+
+	<head>
+	
+		<title>TNO Ad</title>
+	
+		<!-- begin imports -->
+		<link rel="stylesheet" type="text/css" href="itphalloween.css">
+		
+		
+		<script type="text/javascript">
+			document.addEventListener('DOMContentLoaded', function()
+			{
+   				console.log("set event listener.");	
+				document.getElementById("beer").addEventListener("click", function()
+					{
+						showEvent("beer");
+					}
+				);
+				document.getElementById("beer").addEventListener("mouseover", function()
+					{
+						showEvent("beer");
+					}
+				);
+				document.getElementById("cauldron").addEventListener("click", function()
+					{
+						showEvent("cauldron");
+					}
+				);
+				document.getElementById("cauldron").addEventListener("mouseover", function()
+					{
+						showEvent("cauldron");
+					}
+				);
+				document.getElementById("martini").addEventListener("click", function()
+					{
+						showEvent("martini");
+					}
+				);
+				document.getElementById("martini").addEventListener("mouseover", function()
+					{
+						showEvent("martini");
+					}
+				);	
+ 			});
+ 
+			
+			
+			function showEvent(imageClicked)
+			{
+				console.log("running event change");
+				
+				switch (imageClicked)
+				{
+					
+					case "beer": 
+						document.getElementById("ITPevent").innerHTML = "Thursday Night Out";
+						document.getElementById("eventDate").innerHTML = "October 30, 9PM";
+						break;
+					case "cauldron":
+						document.getElementById("ITPevent").innerHTML = "ITP Presents: Haunted House";
+						document.getElementById("eventDate").innerHTML = "October 31, 5PM";
+						break;
+					default: 
+						document.getElementById("ITPevent").innerHTML = "Halloween @ ITP";
+						document.getElementById("eventDate").innerHTML = "October 31, 8:30PM";
+						break;
+				}
+				
+			}
+		</script>
+
+	</head>
+	
+	<body>
+	
+		<h1><span id="Halloween">Halloween</span><span id="atITP">@ITP</span></h1>
+		
+		<!-- container for images -->
+		<div id="imgContainer">
+		
+			<p>
+			
+				<img id="beer" src="assets/beer.png" alt="Beer">
+			
+				<img id="cauldron" src="assets/cauldron.png" alt="Cauldron">
+			
+				<img id="martini" src="assets/martini.png" alt="Martini">
+			
+			</p>
+		</div> <!-- end imgContainer -->
+		
+		
+		<h3>
+			<span id="ITPevent"></span>
+			<p>
+			<p>
+			<span id="eventDate"></span>
+		</h3>
+	
+		<div id="skeletons">
+		
+		
+		
+		</div>
+		
+		<p style="color:white;">Cauldron designed by <a href="http://www.thenounproject.com/imicons">iconsmind.com</a> from the <a href="http://www.thenounproject.com">Noun Project</a></p>
+	</body>
+
+</html>

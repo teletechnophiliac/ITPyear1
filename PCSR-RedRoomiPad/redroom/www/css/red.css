@@ -1,0 +1,87 @@
+/* universal styling */
+html,body
+{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: fixed;
+    padding: 0;
+    margin: 0;
+}
+
+#content-container
+{
+    width: 100%;
+    height: 100%;
+    display: block;
+    position: relative;
+
+    background-image: url("../img/body.png");
+    background-repeat: no-repeat;
+    background-position: center; 
+    background-size: cover;
+}
+
+/* tap targets */
+
+.tap-target
+{
+    position: absolute;
+    opacity: .5;
+    padding: 5%;
+}
+
+#brain
+{
+    width: 60.399px;
+    height: auto;
+    left: 41.08072%;
+    top: 2.98%;
+}
+
+#heart
+{
+    width: 56.854px;
+    height: auto;
+    left: 46.9%;
+    top: 21.9%;
+    
+}
+
+#bicep
+{
+    width: 67.1px;
+    height: auto;
+    left: 21.55%;
+    top: 24.1%;
+   
+}
+
+#stomach
+{
+    width: 80.021px;
+    height: auto;
+    left: 40.4%;
+    top: 32%;
+  
+}
+
+#info
+{
+    width: 80px;
+    height: auto;
+    position: absolute;
+    right: 1.5%;
+    bottom: 1.5%;
+}
+
+/* video */
+video
+{
+    display: none;
+    width: auto;
+    height: auto;
+    margin: 0;
+    padding: 0;
+    z-index: 2;
+}

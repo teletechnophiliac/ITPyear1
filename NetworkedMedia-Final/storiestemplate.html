@@ -1,0 +1,102 @@
+<html>
+  <head>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>ITP Fiction - All Stories</title>
+    
+    <style>
+      body
+      {
+        background-color: #ffffff;
+        font-family: Avenir, sans-serif;
+      	position: relative;
+      	margin: auto;
+      	padding: 2%;
+      }
+       
+      input, input#submit
+      {
+        font-family:inherit;
+        margin: 10px;
+      }
+       
+      textarea
+      {
+        font-family:inherit;
+        width: 40%;
+        max-width: 45%;
+        min-width: 200px;
+        height: 100px;
+        margin: 10px 0px;
+      }
+      
+      #logo
+      {
+        width: 80%;
+        margin: 0 auto;
+      }
+        
+      a
+      {
+        color: #ffffff;
+        background-color: #000000;
+        padding: 2px;
+      }
+      
+      #storyTitle, .storylink
+      {
+        font-weight: bold;
+        text-decoration: underline;
+      }
+      
+      #storyAuthor
+      {
+        font-style: italic;
+      }
+      
+      .taglink
+      {
+        color: #5706BC;
+        background-color: #ffffff;
+      }
+      
+    </style>
+    
+  </head>
+  
+  <body>
+  
+   <div><img src="ITPFictionlogo.png"></div>
+   <br />
+   <br />
+   <a href="/">Add a Story!</a>
+   <br />
+   <br />
+   <h3>All Stories</h3>
+   <br />
+    <% for (var i = 0; i < theStories.length; i++) { %>
+      <p>
+        <span id="storyTitle"><a class='storylink' href='/story?_id=<%=theStories[i]._id %>'><%= theStories[i].title %></a></span> - <span id="storyAuthor"> <%= theStories[i].author %></span>
+        <br />
+        <span>
+        <% for (var t = 0; t < theStories[i].tagsArray.length; t++) { %>
+        <span class='taglink'><%=theStories[i].tagsArray[t] %></span>
+        <% }%>
+        </span>
+      </p>
+      <br />
+    <% } %>
+    
+    <h3>Search</h3>
+    <form action="/search" method="GET">
+      Title: <input type="text" name="titletext">
+      <br />
+      Author: <input type="text" name="author">
+      <br />
+      <input type="submit" id ="search" value="Search" name="search">      
+    </form>
+    
+    
+  </body>
+</html>

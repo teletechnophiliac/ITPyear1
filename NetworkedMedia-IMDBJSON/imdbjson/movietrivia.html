@@ -1,0 +1,104 @@
+<html>
+
+	<head>
+		<!-- begin imports -->
+		<link rel="stylesheet" type="text/css" href="imdbtrivia.css">
+		
+		<!-- begin scripts -->
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+		<!-- code help from the IMDbAPI site (myapifilms.com) -->
+		<!-- load movie information from IMDb -->
+		<script type="text/javascript">
+		var movieTitle,
+			movie,
+			moviePosterURL,
+			movieTrivia;
+	
+		function sendRequest()
+		{
+			
+			movieTitle = document.getElementById("textBox").value;
+			
+			document.getElementById("poster").src="loading.gif";
+			
+			if(movieTitle != "")
+			{
+				$.ajax({
+			 		  data:      'title='+ $("#textBox").val() +'&format=JSONP&movieTrivia=1',
+  					  url:       'http://www.myapifilms.com/imdb',
+  					  dataType:  'jsonp',
+   					  success:   function (response, textStatus, jqXHR) 
+   					  {
+	   				 	//set movie to first item in list and set title
+	   				 	movie = response[0];
+   					 	
+   					 	$("#thetitle").text(movieTitle);
+     				
+     					//set trivia
+            			if (movie.movieTrivia != undefined) 
+            			{
+            				console.log("found the trivia " + movie.movieTrivia.length);
+            				movieTrivia = movie.movieTrivia;
+            				
+            				$("#trivia").text(movieTrivia[Math.floor(Math.random() * movieTrivia.length)]);
+            			}
+            		
+    	        		//show poster	
+	            		if (movie.urlPoster != undefined) 
+    	        		{
+        	    			$("#poster").attr("src", movie.urlPoster);
+            			}
+            			else
+            			{
+            				$("#poster").attr("src", "none.png");
+            			}
+            		
+            			$("#triviaPart").show();
+            		 },
+   				  	error: function()
+   				  	{ 
+   				  		alert("Movie not found.");
+   				 	 }
+				}); 
+			}       
+		}
+		
+		function newTrivia()
+		{
+			if (movie.movieTrivia != undefined) 
+            {
+            	$("#trivia").text(movieTrivia[Math.floor(Math.random() * movieTrivia.length)]);
+            }
+		}
+		
+		</script>
+
+		<!-- end scripts -->
+		
+		<title> IMDB Trivia </title>	
+
+	</head>
+	
+	<body>
+	
+		<h1> IMDB Trivia </h1>
+
+		<div id="movieInfo">
+			Title: <input type="text" id="textBox"/> <button onclick="sendRequest();">Send</button>
+			<br />
+			<h3 id="thetitle"></h3>
+			<p> 
+				<img id="poster"></img> 
+			</p>
+			<div id="triviaPart">
+				<b><i>Trivia</i></b>: <span id="trivia"></span>
+				<br />
+				<br />
+				<button onclick="newTrivia();">Another Fact About This Movie</button>
+			</div>
+		</div>
+	
+	</body>
+
+</html>
