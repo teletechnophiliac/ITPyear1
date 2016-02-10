@@ -33,7 +33,6 @@ Work done during my first year at NYU's Interactive Telecommunications Program
   <li>Always On, Always Connected</li>
   <li>Project Development Studio</li>
   <li>Playful Communication of Serious Research</li>
-  <li>This is the Remix</li>
 </ul>
 <p>
 <h5>Always On, Always Connected</h5>
@@ -42,6 +41,7 @@ _And Now The Temp_ (HTML/CSS, JavaScript): PhoneGap application that works with 
 <p>
 <h5>Project Development Studio</h5>
 <p>
+_Project Legend_ (HTML/CSS, JavaScript): PhoneGap prototype of a location based game centered around New York's urban legends
 <h5>Playful Communication of Serious Research</h5>
 _RED_ (HTML/CSS, JavaScript): PhoneGap application for the RED room exhibit to teach visitors about the color red and its effects on us. 
 <hr>
